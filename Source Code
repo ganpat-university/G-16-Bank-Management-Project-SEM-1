@@ -1,0 +1,184 @@
+#include <stdio.h>
+struct account
+{
+  int acc_no;
+  char name[50];
+  int ini_depo;
+  int balance;
+  char addy[50];
+};
+
+int
+main ()
+{
+  int i = 0;
+  int choice = 0;
+  struct account acc[100];
+  while (choice != 7)
+  {
+      printf ("1 Create Account\n");
+      printf ("2 Update Account\n");
+      printf ("3 Transaction\n");
+      printf ("4 Show Details Of Account\n");
+      printf ("5 Remove  Account\n");
+      printf ("6 View Customer List\n");
+      printf ("7 Exit\n");
+      printf ("--------------------------------\n");
+      scanf ("%d", &choice);
+      printf ("--------------------------------\n");
+      if (choice == 1)
+      {
+          here:
+          printf ("Enter Information\n");
+          printf ("Account Number ");
+          int acc_check;
+          scanf ("%d", &acc_check);
+          for (int j = 0; j <= i; j++)
+          {
+              if (acc_check == acc[j].acc_no)
+		      {
+		          printf ("Account Number Already In Use Try Again\n");
+		          printf ("--------------------------------\n");
+		          goto here;
+		      }
+	      }
+	      acc[i].acc_no = acc_check;
+	      printf ("Name ");
+	      scanf ("%s", acc[i].name);
+	      printf ("Inital Deposit ");
+	      scanf ("%d", &acc[i].ini_depo);
+	      printf ("Address ");
+	      scanf ("%s", acc[i].addy);
+	      acc[i].balance += acc[i].ini_depo;
+	      printf ("--------------------------------\n");
+	      i++;
+	  }
+      if (choice == 2)
+	  {
+	      printf("Enter Account Number ");
+	      int acc_check;
+	      scanf ("%d", &acc_check);
+	      printf ("--------------------------------\n");
+	      for (int j = 0; j < 100; j++)
+	      {
+	          if (acc_check == acc[j].acc_no)
+		      {
+		          printf("What Do You Want To Update?\n");
+		          printf("1 For Name,2 For Address ");
+		          int ch2;
+		          scanf("%d",&ch2);
+		          printf ("--------------------------------\n");
+		          if(ch2==1)
+		          {
+		              char new_name[50];
+		              printf("Enter New Name ");
+		              scanf("%s",acc[j].name);
+		          }
+		          if(ch2==2)
+		          {
+		              char new_addy[50];
+		              printf("Enter New Address ");
+		              scanf("%s",acc[j].addy);
+		          }
+		          break;
+		      }
+	      }
+	      printf ("--------------------------------\n");
+	   }
+      if (choice == 3)
+	  {
+	      printf ("Enter Account Number ");
+	      int acc_check;
+	      scanf ("%d", &acc_check);
+	      printf ("--------------------------------\n");
+	      for (int j = 0; j < 100; j++)
+	      {
+	          if (acc_check == acc[j].acc_no)
+		      {
+		          int tran_choice;
+		          printf ("1 For Deposit\n");
+		          printf ("2 For Withdrawal\n");
+		          printf ("--------------------------------\n");
+		          scanf ("%d", &tran_choice);
+		          printf ("--------------------------------\n");
+		          if (tran_choice == 1)
+		          {
+		              int ammount;
+		              printf ("Enter Ammount To Deposit ");
+		              scanf ("%d", &ammount);
+		              acc[j].balance += ammount;
+		              printf ("Deposited\n");
+		          }
+		          if (tran_choice == 2)
+		          {
+		              int ammount;
+		              printf ("Enter Ammount To Withdraw  ");
+		              scanf ("%d", &ammount);
+		              if (acc[j].balance < ammount)
+			          {
+			              printf ("Not Enough Balance\n");
+			          }
+		              else
+			          {
+			              acc[j].balance -= ammount;
+			              printf ("Withdrawed\n");
+			          }
+		          }
+		          break;
+		      }
+	    }
+	    printf ("--------------------------------\n");
+	  }
+      if (choice == 4)
+	  {
+	      printf ("Enter Account Number ");
+	      int acc_check;
+	      scanf ("%d", &acc_check);
+	      printf ("--------------------------------\n");
+	      for (int j = 0; j < 100; j++)
+	      {
+	          if (acc_check == acc[j].acc_no)
+		      {
+		          printf ("Account Number %d\n", acc[j].acc_no);
+		          printf ("Name %s\n", acc[j].name);
+		          printf ("Balance %d\n", acc[j].balance);
+		          printf ("Address %s\n", acc[j].addy);
+		          break;
+		      }
+	      }
+	      printf ("--------------------------------\n");
+	  }
+      if (choice == 5)
+	  {
+	      printf ("Enter Account Number ");
+	      int acc_check;
+	      scanf ("%d", &acc_check);
+	      printf ("--------------------------------\n");
+	      for (int j = 0; j < 100; j++)
+	      {
+	          if (acc_check == acc[j].acc_no)
+		      {
+		          acc[j].acc_no = 0;
+		          acc[j].balance = 0;
+		          acc[j].ini_depo = 0;
+		          break;
+		      }
+	      }
+	      printf ("--------------------------------\n");
+	  }
+      if (choice == 6)
+	  {
+	      for (int k = 0; k <= i; k++)
+	      {
+	          if(acc[k].acc_no!=0)
+	          {
+	              printf ("Account Number %d\n", acc[k].acc_no);
+	              printf ("Name %s\n", acc[k].name);
+	              printf ("Balance %d\n", acc[k].balance);
+	              printf ("Address %s\n", acc[k].addy);
+	              printf ("--------------------------------\n");
+	          }
+	      }
+	  }
+   }
+}
